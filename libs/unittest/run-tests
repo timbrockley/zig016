@@ -1,0 +1,55 @@
+#!/bin/bash
+#--------------------------------------------------------------------------------
+#################################################################################
+#--------------------------------------------------------------------------------
+ERROR_LOG="error.log"; [ -f "${ERROR_LOG}" ] && rm "${ERROR_LOG}"
+#--------------------------------------------------------------------------------
+STDOUT=$(mktemp); STDERR=$(mktemp)
+#--------------------------------------------------------------------------------
+zig-run >"${STDOUT}" 2>"${STDERR}"
+#--------------------------------------------------------------------------------
+[ -s "${STDOUT}" ] && OUTPUT=$(cat "${STDOUT}"); [ ! -s "${STDOUT}" ] && OUTPUT=$(cat "${STDERR}")
+#--------------------------------------------------------------------------------
+[[ ! "${OUTPUT}" =~ "PASS: compareStringResultError expected_result" ]] && echo "(${LINENO}) PASS: compareStringResultError expected_result" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "FAIL:     compareStringResultError invalid_result" ]] && echo "(${LINENO}) FAIL:     compareStringResultError invalid_result" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "PASS: compareStringResultError error.ExpectedError" ]] && echo "(${LINENO}) PASS: compareStringResultError error.ExpectedError" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "FAIL: compareStringResultError error.UnexpectedError" ]] && echo "(${LINENO}) FAIL: compareStringResultError error.UnexpectedError" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "PASS: compareStringSlice pass" ]] && echo "(${LINENO}) PASS: compareStringSlice pass" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "FAIL:     compareStringSlice fail" ]] && echo "(${LINENO}) FAIL:     compareStringSlice fail" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "PASS: compareCString pass" ]] && echo "(${LINENO}) PASS: compareCString pass" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "FAIL:     compareCString fail" ]] && echo "(${LINENO}) FAIL:     compareCString fail" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "PASS: compareStringFormat pass" ]] && echo "(${LINENO}) PASS: compareStringFormat pass" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "FAIL: compareStringFormat fail" ]] && echo "(${LINENO}) FAIL: compareStringFormat fail" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "PASS: compareByteSlice pass" ]] && echo "(${LINENO}) PASS: compareByteSlice pass" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "FAIL:     compareByteSlice fail" ]] && echo "(${LINENO}) FAIL:     compareByteSlice fail" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "PASS: compareByte pass" ]] && echo "(${LINENO}) PASS: compareByte pass" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "FAIL:     compareByte fail" ]] && echo "(${LINENO}) FAIL:     compareByte fail" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "PASS: compareInt pass" ]] && echo "(${LINENO}) PASS: compareInt pass" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "FAIL:     compareInt fail" ]] && echo "(${LINENO}) FAIL:     compareInt fail" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "PASS: compareBool pass" ]] && echo "(${LINENO}) PASS: compareBool pass" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "FAIL:     compareBool fail" ]] && echo "(${LINENO}) FAIL:     compareNull fail" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "PASS: compareNull pass" ]] && echo "(${LINENO}) PASS: compareNull pass" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "FAIL: compareNull fail" ]] && echo "(${LINENO}) FAIL: compareNull fail" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "compareError ExpectError" ]] && echo "(${LINENO}) compareError ExpectError" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "compareError InvalidError" ]] && echo "(${LINENO}) compareError InvalidError" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "PASS: pass" ]] && echo "(${LINENO}) pass" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "FAIL: fail" ]] && echo "(${LINENO}) FAIL: fail" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "PASS: errorPass error.ExpectedError" ]] && echo "(${LINENO}) PASS: errorPass error.ExpectedError" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "errorFail error.UnexpectedError" ]] && echo "(${LINENO}) errorFail error.UnexpectedError" >> ${ERROR_LOG}
+[[ ! "${OUTPUT}" =~ "errorExpectedFail error.ExpectedError" ]] && echo "(${LINENO}) errorExpectedFail error.ExpectedError" >> ${ERROR_LOG}
+#--------------------------------------------------------------------------------
+if [ -f ${ERROR_LOG} ]
+then
+    cat ${ERROR_LOG} >&2
+else
+    echo "no errors detected"
+fi
+#--------------------------------------------------------------------------------
+[ -f "${STDOUT}" ] && rm "${STDOUT}"
+[ -f "${STDERR}" ] && rm "${STDERR}"
+[ -f "${ERROR_LOG}" ] && rm "${ERROR_LOG}"
+#--------------------------------------------------------------------------------
+exit 0
+#--------------------------------------------------------------------------------
+#################################################################################
+#--------------------------------------------------------------------------------

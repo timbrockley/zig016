@@ -1,0 +1,32 @@
+version: '3'
+
+vars:
+  CACHE_PATH: ".zig-cache"
+  OUTPUT_PATH: "zig-out"
+
+tasks:
+  clean:
+    cmds:
+      - rm -rf {{.CACHE_PATH}} {{.OUTPUT_PATH}}
+
+  build:
+    dir: "{{.OUTPUT_PATH}}"
+    cmds:
+      - zig016 build-lib ../math.zig -femit-bin=libmath.so -dynamic -fstrip -O ReleaseSmall -target native -mcpu=baseline
+      - patchelf --set-soname libmath.so libmath.so
+      - zig016 build-exe ../main.zig -femit-bin=zigmain -dynamic -fstrip -L. -lmath -O ReleaseSmall -target native -mcpu=baseline
+      - gcc -o cmain ../main.c -L. -lmath -Wl,-rpath=.
+
+  debug:
+    dir: "{{.OUTPUT_PATH}}"
+    cmds:
+      - zig016 build-lib ../math.zig -femit-bin=libmath.so -dynamic -O Debug
+      - patchelf --set-soname libmath.so libmath.so
+      - zig016 build-exe ../main.zig -femit-bin=zigmain -lc -dynamic -L. -lmath -O Debug
+      - gcc -o cmain ../main.c -L. -lmath -Wl,-rpath=.
+
+  run:
+    dir: "{{.OUTPUT_PATH}}"
+    cmds:
+      - ./cmain {{.CLI_ARGS}}
+      - ./zigmain {{.CLI_ARGS}}
