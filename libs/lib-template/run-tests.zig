@@ -1,6 +1,6 @@
 //--------------------------------------------------------------------------------
 const std = @import("std");
-const unittest = @import("libs/unittest.zig");
+const unittest = @import("libs/unittest26278.zig");
 var lib = @import("lib-template.zig").init(.{});
 //--------------------------------------------------------------------------------
 pub fn main(init: std.process.Init) !void {

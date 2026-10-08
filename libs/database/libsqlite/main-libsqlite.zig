@@ -1,8 +1,7 @@
 //--------------------------------------------------------------------------------
 const std = @import("std");
 //--------------------------------------------------------------------------------
-const unittest = @import("libs/unittest.zig");
-const c = @import("libsqlite-sqlite3.zig");
+const unittest = @import("libs/unittest26278.zig");
 //--------------------------------------------------------------------------------
 //################################################################################
 //--------------------------------------------------------------------------------
@@ -129,9 +128,9 @@ pub fn main(init: std.process.Init) !u8 {
     //--------------------------------------------------------------------------------
     {
         const rc = sqliteOpen(DATABASE_FILEPATH, &db_handle);
-        if (rc != c.SQLITE_OK or db_handle == null) {
+        if (rc != SQLITE_OK or db_handle == null) {
             std.log.err("failed to open database: ({d}) {s}\n", .{ rc, sqliteErrmsg(db_handle) });
-            return c.SQLITE_ERROR;
+            return SQLITE_ERROR;
         }
         // std.debug.print("database open: db_handle = {*}\n", .{db_handle});
         // try ut.printLine();
@@ -141,7 +140,7 @@ pub fn main(init: std.process.Init) !u8 {
         const sql = "PRAGMA journal_mode=WAL;";
         var errmsg: [*c]u8 = null;
         const rc = sqliteExec(db_handle, sql, execCallback, &context, &errmsg);
-        if (rc != c.SQLITE_OK) {
+        if (rc != SQLITE_OK) {
             defer sqliteFree(errmsg);
             std.log.err("sqliteExec: {s}\n", .{errmsg});
             return @intCast(rc);
@@ -153,7 +152,7 @@ pub fn main(init: std.process.Init) !u8 {
         const sql = "DROP TABLE IF EXISTS test;";
         var errmsg: [*c]u8 = null;
         const rc = sqliteExec(db_handle, sql, execCallback, &context, &errmsg);
-        if (rc != c.SQLITE_OK) {
+        if (rc != SQLITE_OK) {
             defer sqliteFree(errmsg);
             std.log.err("sqliteExec: {s}\n", .{errmsg});
             return @intCast(rc);
@@ -164,7 +163,7 @@ pub fn main(init: std.process.Init) !u8 {
         const sql = "CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY AUTOINCREMENT, uint64 INTEGER UNSIGNED DEFAULT 0 NOT NULL, integer INTEGER DEFAULT 0 NOT NULL, float REAL DEFAULT 0 NOT NULL, text VARCHAR(255) DEFAULT '' NOT NULL, blob BLOB DEFAULT '' NOT NULL, blob_nullable BLOB);";
         var errmsg: [*c]u8 = null;
         const rc = sqliteExec(db_handle, sql, execCallback, &context, &errmsg);
-        if (rc != c.SQLITE_OK) {
+        if (rc != SQLITE_OK) {
             defer sqliteFree(errmsg);
             std.log.err("sqliteExec: {s}\n", .{errmsg});
             return @intCast(rc);
@@ -175,7 +174,7 @@ pub fn main(init: std.process.Init) !u8 {
         const sql = "INSERT INTO test (uint64, integer, float, text, blob, blob_nullable) VALUES(1, 1, 1.1, 'text1', X'626C6F6231', X'F09F90A7');";
         var errmsg: [*c]u8 = null;
         const rc = sqliteExec(db_handle, sql, execCallback, &context, &errmsg);
-        if (rc != c.SQLITE_OK) {
+        if (rc != SQLITE_OK) {
             defer sqliteFree(errmsg);
             std.log.err("sqliteExec: {s}\n", .{errmsg});
             return @intCast(rc);
@@ -186,7 +185,7 @@ pub fn main(init: std.process.Init) !u8 {
         const sql = "INSERT INTO test (uint64, integer, float, text, blob) VALUES(2, 2, 2.2, 'text2', X'626C6F6232');";
         var errmsg: [*c]u8 = null;
         const rc = sqliteExec(db_handle, sql, execCallback, &context, &errmsg);
-        if (rc != c.SQLITE_OK) {
+        if (rc != SQLITE_OK) {
             defer sqliteFree(errmsg);
             std.log.err("sqliteExec: {s}\n", .{errmsg});
             return @intCast(rc);
@@ -212,7 +211,7 @@ pub fn main(init: std.process.Init) !u8 {
             &errmsg,
         );
         //----------------------------------------
-        if (rc != c.SQLITE_OK) {
+        if (rc != SQLITE_OK) {
             defer sqliteFree(errmsg);
             std.log.err("sqliteGetTable: {s}\n", .{errmsg});
             return @intCast(rc);
@@ -259,7 +258,7 @@ pub fn main(init: std.process.Init) !u8 {
         const sql = "SELECT * FROM test;";
         var errmsg: [*c]u8 = null;
         const rc = sqliteExec(db_handle, sql, execCallback, &context, &errmsg);
-        if (rc != c.SQLITE_OK) {
+        if (rc != SQLITE_OK) {
             defer sqliteFree(errmsg);
             std.log.err("sqliteExec: {s}\n", .{errmsg});
             return @intCast(rc);
@@ -278,7 +277,7 @@ pub fn main(init: std.process.Init) !u8 {
             &context,
             &errmsg,
         );
-        if (rc != c.SQLITE_OK) {
+        if (rc != SQLITE_OK) {
             defer sqliteFree(errmsg);
             std.log.err("querySQLiteColumns: ({d}) {s}\n", .{ rc, errmsg });
             return @intCast(rc);
@@ -298,7 +297,7 @@ pub fn main(init: std.process.Init) !u8 {
         //----------------------------
         errmsg = null;
         var rc = sqlitePrepare(db_handle, sql, &stmt_handle, &errmsg);
-        if (rc != c.SQLITE_OK) {
+        if (rc != SQLITE_OK) {
             defer sqliteFree(errmsg);
             std.log.err("sqlitePrepare: ({d}) {s}\n", .{ rc, errmsg });
             return @intCast(rc);
@@ -312,7 +311,7 @@ pub fn main(init: std.process.Init) !u8 {
         const text = "text3";
         const blob = "\xF0\x9F\x90\xA7\xF0\x9F\x90\xA7";
         //------------------------------------------------------------
-        if (rc == c.SQLITE_OK) {
+        if (rc == SQLITE_OK) {
             rc = sqliteBindUInt64(
                 stmt_handle,
                 1,
@@ -320,7 +319,7 @@ pub fn main(init: std.process.Init) !u8 {
             );
         }
         //------------------------------------------------------------
-        if (rc == c.SQLITE_OK) {
+        if (rc == SQLITE_OK) {
             rc = sqliteBindInt64(
                 stmt_handle,
                 2,
@@ -328,7 +327,7 @@ pub fn main(init: std.process.Init) !u8 {
             );
         }
         //------------------------------------------------------------
-        if (rc == c.SQLITE_OK) {
+        if (rc == SQLITE_OK) {
             rc = sqliteBindDouble(
                 stmt_handle,
                 3,
@@ -336,7 +335,7 @@ pub fn main(init: std.process.Init) !u8 {
             );
         }
         //------------------------------------------------------------
-        if (rc == c.SQLITE_OK) {
+        if (rc == SQLITE_OK) {
             rc = sqliteBindText(
                 stmt_handle,
                 4,
@@ -347,14 +346,14 @@ pub fn main(init: std.process.Init) !u8 {
         }
         //------------------------------------------------------------
         // used to testing - will be overridden later
-        if (rc == c.SQLITE_OK) {
+        if (rc == SQLITE_OK) {
             rc = sqliteBindNull(
                 stmt_handle,
                 5,
             );
         }
         //------------------------------------------------------------
-        if (rc == c.SQLITE_OK) {
+        if (rc == SQLITE_OK) {
             rc = sqliteBindBlob(
                 stmt_handle,
                 5,
@@ -364,12 +363,12 @@ pub fn main(init: std.process.Init) !u8 {
             );
         }
         //------------------------------------------------------------
-        if (rc != c.SQLITE_OK) {
+        if (rc != SQLITE_OK) {
             std.log.err("sqliteBind: ({d}) {s}\n", .{ rc, sqliteErrmsg(db_handle) });
             return @intCast(rc);
         }
         //------------------------------------------------------------
-        if (sqliteStep(stmt_handle) != c.SQLITE_DONE) {
+        if (sqliteStep(stmt_handle) != SQLITE_DONE) {
             std.log.err("sqliteStep: ({d}) {s}\n", .{ rc, sqliteErrmsg(db_handle) });
             return @intCast(rc);
         }
@@ -385,7 +384,7 @@ pub fn main(init: std.process.Init) !u8 {
         //------------------------------------------------------------
         errmsg = null;
         var rc = sqlitePrepare(db_handle, sql, &stmt_handle, &errmsg);
-        if (rc != c.SQLITE_OK) {
+        if (rc != SQLITE_OK) {
             defer sqliteFree(errmsg);
             std.log.err("sqlitePrepare: ({d}) {s}\n", .{ rc, errmsg });
             return @intCast(rc);
@@ -404,7 +403,7 @@ pub fn main(init: std.process.Init) !u8 {
             //------------------------------------------------------------
             rc = sqliteStep(stmt_handle);
             //------------------------------------------------------------
-            if (rc == c.SQLITE_ROW) {
+            if (rc == SQLITE_ROW) {
                 //------------------------------------------------------------
                 const id: i64 = sqliteColumnInt64(stmt_handle, 0);
                 const uint64: u64 = sqliteColumnUInt64(stmt_handle, 1);
@@ -438,7 +437,7 @@ pub fn main(init: std.process.Init) !u8 {
                 //---------------------------
                 row += 1;
                 //------------------------------------------------------------
-            } else if (rc == c.SQLITE_DONE) {
+            } else if (rc == SQLITE_DONE) {
                 //----------------------------------------
                 break;
                 //----------------------------------------
@@ -460,7 +459,7 @@ pub fn main(init: std.process.Init) !u8 {
         const row_count = getRowCount(db_handle, "test", &errmsg);
         if (errmsg != null) {
             defer sqliteFree(errmsg);
-            return c.SQLITE_ERROR;
+            return SQLITE_ERROR;
         }
         try ut.compareInteger("getRowCount", row_count, 3, .{ .src = @src() });
     }
@@ -471,7 +470,7 @@ pub fn main(init: std.process.Init) !u8 {
         if (errmsg != null) {
             defer sqliteFree(errmsg);
             std.log.err("getColumnCount: {s}\n", .{errmsg.?});
-            return c.SQLITE_ERROR;
+            return SQLITE_ERROR;
         }
         try ut.compareInteger("getColumnCount", column_count, 7, .{ .src = @src() });
     }
@@ -499,7 +498,7 @@ pub fn main(init: std.process.Init) !u8 {
         );
         defer freeSQLiteColumnsTable(table_context);
         //------------------------------------------------------------
-        if (rc != c.SQLITE_OK) {
+        if (rc != SQLITE_OK) {
             defer sqliteFree(errmsg);
             std.log.err("getSQLiteColumnsTable: ({d}) {s}\n", .{ rc, errmsg });
             return @intCast(rc);
@@ -676,7 +675,7 @@ pub fn main(init: std.process.Init) !u8 {
     //--------------------------------------------------------------------------------
     try ut.printSummary();
     //--------------------------------------------------------------------------------
-    return c.SQLITE_OK;
+    return SQLITE_OK;
     //--------------------------------------------------------------------------------
     //################################################################################
     //--------------------------------------------------------------------------------
@@ -702,10 +701,10 @@ pub fn execCallback(
         const name = std.mem.span(azColName[0]);
         const value = std.mem.span(azColName[1]);
         //----------------------------------------
-        string_column.name = context.allocator.dupe(u8, name) catch return c.SQLITE_ERROR;
-        string_column.value = context.allocator.dupe(u8, value) catch return c.SQLITE_ERROR;
+        string_column.name = context.allocator.dupe(u8, name) catch return SQLITE_ERROR;
+        string_column.value = context.allocator.dupe(u8, value) catch return SQLITE_ERROR;
         //----------------------------------------
-        context.string_rows.append(context.allocator, string_column) catch return c.SQLITE_ERROR;
+        context.string_rows.append(context.allocator, string_column) catch return SQLITE_ERROR;
         //----------------------------------------
     }
     //----------------------------------------
@@ -721,7 +720,7 @@ pub fn execCallback(
     //----------------------------------------
     std.debug.print("\n", .{});
     //----------------------------------------
-    return c.SQLITE_OK;
+    return SQLITE_OK;
     //----------------------------------------
 }
 //--------------------------------------------------------------------------------
@@ -740,7 +739,7 @@ pub fn queryCallback(
         context = @ptrCast(@alignCast(ctx_ptr));
     } else {
         std.log.err("invalid context", .{});
-        return c.SQLITE_ERROR;
+        return SQLITE_ERROR;
     }
     //----------------------------------------
     var current_row = FixedRow{};
@@ -756,13 +755,13 @@ pub fn queryCallback(
                 .integer => current_row.integer = column.integer,
                 .float => current_row.float = column.float,
                 .text => {
-                    if (column.len > 0) current_row.text = context.allocator.dupe(u8, column.ptr[0..@intCast(column.len)]) catch return c.SQLITE_ERROR;
+                    if (column.len > 0) current_row.text = context.allocator.dupe(u8, column.ptr[0..@intCast(column.len)]) catch return SQLITE_ERROR;
                 },
                 .blob => {
-                    if (column.len > 0) current_row.blob = context.allocator.dupe(u8, column.ptr[0..@intCast(column.len)]) catch return c.SQLITE_ERROR;
+                    if (column.len > 0) current_row.blob = context.allocator.dupe(u8, column.ptr[0..@intCast(column.len)]) catch return SQLITE_ERROR;
                 },
                 .blob_nullable => {
-                    if (column.len > 0) current_row.blob_nullable = context.allocator.dupe(u8, column.ptr[0..@intCast(column.len)]) catch return c.SQLITE_ERROR;
+                    if (column.len > 0) current_row.blob_nullable = context.allocator.dupe(u8, column.ptr[0..@intCast(column.len)]) catch return SQLITE_ERROR;
                 },
             }
         } else {
@@ -771,13 +770,45 @@ pub fn queryCallback(
         //----------------------------------------
     }
     //----------------------------------------
-    context.fixed_rows.append(context.allocator, current_row) catch return c.SQLITE_ERROR;
+    context.fixed_rows.append(context.allocator, current_row) catch return SQLITE_ERROR;
     //----------------------------------------
-    return c.SQLITE_OK;
+    return SQLITE_OK;
     //----------------------------------------
 }
 //--------------------------------------------------------------------------------
 //################################################################################
+//--------------------------------------------------------------------------------
+pub const SQLITE_OK = @as(c_int, 0);
+pub const SQLITE_ERROR = @as(c_int, 1);
+pub const SQLITE_INTERNAL = @as(c_int, 2);
+pub const SQLITE_PERM = @as(c_int, 3);
+pub const SQLITE_ABORT = @as(c_int, 4);
+pub const SQLITE_BUSY = @as(c_int, 5);
+pub const SQLITE_LOCKED = @as(c_int, 6);
+pub const SQLITE_NOMEM = @as(c_int, 7);
+pub const SQLITE_READONLY = @as(c_int, 8);
+pub const SQLITE_INTERRUPT = @as(c_int, 9);
+pub const SQLITE_IOERR = @as(c_int, 10);
+pub const SQLITE_CORRUPT = @as(c_int, 11);
+pub const SQLITE_NOTFOUND = @as(c_int, 12);
+pub const SQLITE_FULL = @as(c_int, 13);
+pub const SQLITE_CANTOPEN = @as(c_int, 14);
+pub const SQLITE_PROTOCOL = @as(c_int, 15);
+pub const SQLITE_EMPTY = @as(c_int, 16);
+pub const SQLITE_SCHEMA = @as(c_int, 17);
+pub const SQLITE_TOOBIG = @as(c_int, 18);
+pub const SQLITE_CONSTRAINT = @as(c_int, 19);
+pub const SQLITE_MISMATCH = @as(c_int, 20);
+pub const SQLITE_MISUSE = @as(c_int, 21);
+pub const SQLITE_NOLFS = @as(c_int, 22);
+pub const SQLITE_AUTH = @as(c_int, 23);
+pub const SQLITE_FORMAT = @as(c_int, 24);
+pub const SQLITE_RANGE = @as(c_int, 25);
+pub const SQLITE_NOTADB = @as(c_int, 26);
+pub const SQLITE_NOTICE = @as(c_int, 27);
+pub const SQLITE_WARNING = @as(c_int, 28);
+pub const SQLITE_ROW = @as(c_int, 100);
+pub const SQLITE_DONE = @as(c_int, 101);
 //--------------------------------------------------------------------------------
 extern fn checkTableName(table_name: [*c]const u8) bool;
 //--------------------------------------------------------------------------------
