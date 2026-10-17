@@ -1,3 +1,6 @@
+//--------------------------------------------------------------------------------
+// sudo apt install -y libsqlite3-dev
+//--------------------------------------------------------------------------------
 const std = @import("std");
 
 pub fn build(b: *std.Build) void {
@@ -37,3 +40,4 @@ pub fn build(b: *std.Build) void {
     const run_cmd = b.addRunArtifact(exe);
     run_step.dependOn(&run_cmd.step);
 }
+//--------------------------------------------------------------------------------

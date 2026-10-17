@@ -1,9 +1,9 @@
 //--------------------------------------------------------------------------------
 // sudo apt install libmariadb-dev libmariadb-dev-compat
-// zig translate-c -lc /usr/include/mysql/mysql.h > mysql.zig
+// zig translate-c c.h > c.zig
 //--------------------------------------------------------------------------------
 const std = @import("std");
-const c = @import("mysql.zig");
+const c = @import("c.zig");
 //--------------------------------------------------------------------------------
 pub fn main() !void {
     //------------------------------------------------------------

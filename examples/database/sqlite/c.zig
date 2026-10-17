@@ -1,7 +1,3 @@
-//--------------------------------------------------------------------------------
-// sudo apt install -y libsqlite3-dev
-// zig translate-c -lc /usr/include/sqlite3.h > sqlite3.zig
-//--------------------------------------------------------------------------------
 const __root = @This();
 pub const __builtin = @import("std").zig.c_translation.builtins;
 pub const __helpers = @import("std").zig.c_translation.helpers;

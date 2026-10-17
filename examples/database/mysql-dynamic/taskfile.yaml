@@ -21,8 +21,8 @@ tasks:
 
   run:
     dir: "{{.OUTPUT_PATH}}"
-    cmd: ./main
+    cmd: zig016 run ../main.zig -lc -lmysqlclient
 
   test:
     dir: "{{.OUTPUT_PATH}}"
-    cmd: ./main
+    cmd: zig016 run ../main.zig -lc -lmysqlclient

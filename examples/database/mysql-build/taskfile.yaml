@@ -27,4 +27,4 @@ tasks:
   test:
     dir: "{{.OUTPUT_PATH}}"
     cmds:
-      - zig016 run ../src/run-tests.zig -O Debug -- "$@"
+      - ./main {{.CLI_ARGS}}
