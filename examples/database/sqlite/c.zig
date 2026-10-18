@@ -1060,8 +1060,10 @@ pub const __x86_64__ = @as(c_int, 1);
 pub const __x86_64 = @as(c_int, 1);
 pub const __SEG_GS = @as(c_int, 1);
 pub const __SEG_FS = @as(c_int, 1);
-pub const __seg_gs = @compileError("unable to translate macro: undefined identifier `address_space`"); // <builtin>:33:9
-pub const __seg_fs = @compileError("unable to translate macro: undefined identifier `address_space`"); // <builtin>:34:9
+pub const __seg_gs = @compileError("unable to translate macro: undefined identifier `address_space`");
+// <builtin>:33:9
+pub const __seg_fs = @compileError("unable to translate macro: undefined identifier `address_space`");
+// <builtin>:34:9
 pub const __LAHF_SAHF__ = @as(c_int, 1);
 pub const __AES__ = @as(c_int, 1);
 pub const __VAES__ = @as(c_int, 1);
@@ -1186,10 +1188,12 @@ pub const __SIZEOF_INT128__ = @as(c_int, 16);
 pub const __INTPTR_TYPE__ = c_long;
 pub const __UINTPTR_TYPE__ = c_ulong;
 pub const __INTMAX_TYPE__ = c_long;
-pub const __INTMAX_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `L`"); // <builtin>:160:9
+pub const __INTMAX_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `L`");
+// <builtin>:160:9
 pub const __INTMAX_C = __helpers.L_SUFFIX;
 pub const __UINTMAX_TYPE__ = c_ulong;
-pub const __UINTMAX_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `UL`"); // <builtin>:163:9
+pub const __UINTMAX_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `UL`");
+// <builtin>:163:9
 pub const __UINTMAX_C = __helpers.UL_SUFFIX;
 pub const __PTRDIFF_TYPE__ = c_long;
 pub const __SIZE_TYPE__ = c_ulong;
@@ -1224,7 +1228,8 @@ pub inline fn __INT32_C(c: anytype) @TypeOf(c) {
 pub const __INT64_TYPE__ = c_long;
 pub const __INT64_FMTd__ = "ld";
 pub const __INT64_FMTi__ = "li";
-pub const __INT64_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `L`"); // <builtin>:189:9
+pub const __INT64_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `L`");
+// <builtin>:189:9
 pub const __INT64_C = __helpers.L_SUFFIX;
 pub const __UINT8_TYPE__ = u8;
 pub const __UINT8_FMTo__ = "hho";
@@ -1255,7 +1260,8 @@ pub const __UINT32_FMTo__ = "o";
 pub const __UINT32_FMTu__ = "u";
 pub const __UINT32_FMTx__ = "x";
 pub const __UINT32_FMTX__ = "X";
-pub const __UINT32_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `U`"); // <builtin>:214:9
+pub const __UINT32_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `U`");
+// <builtin>:214:9
 pub const __UINT32_C = __helpers.U_SUFFIX;
 pub const __UINT32_MAX__ = __helpers.promoteIntLiteral(c_uint, 4294967295, .decimal);
 pub const __INT32_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);
@@ -1264,7 +1270,8 @@ pub const __UINT64_FMTo__ = "lo";
 pub const __UINT64_FMTu__ = "lu";
 pub const __UINT64_FMTx__ = "lx";
 pub const __UINT64_FMTX__ = "lX";
-pub const __UINT64_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `UL`"); // <builtin>:223:9
+pub const __UINT64_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `UL`");
+// <builtin>:223:9
 pub const __UINT64_C = __helpers.UL_SUFFIX;
 pub const __UINT64_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);
 pub const __INT64_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);
@@ -1420,13 +1427,19 @@ pub const __PIC__ = @as(c_int, 2);
 pub const __GLIBC_MINOR__ = @as(c_int, 41);
 pub const SQLITE3_H = "";
 pub const __STDC_VERSION_STDARG_H__ = @as(c_int, 0);
-pub const va_start = @compileError("unable to translate macro: undefined identifier `__builtin_va_start`"); // /usr/local/zig/lib/compiler/aro/include/stdarg.h:12:9
-pub const va_end = @compileError("unable to translate macro: undefined identifier `__builtin_va_end`"); // /usr/local/zig/lib/compiler/aro/include/stdarg.h:14:9
-pub const va_arg = @compileError("unable to translate macro: undefined identifier `__builtin_va_arg`"); // /usr/local/zig/lib/compiler/aro/include/stdarg.h:15:9
-pub const __va_copy = @compileError("unable to translate macro: undefined identifier `__builtin_va_copy`"); // /usr/local/zig/lib/compiler/aro/include/stdarg.h:18:9
-pub const va_copy = @compileError("unable to translate macro: undefined identifier `__builtin_va_copy`"); // /usr/local/zig/lib/compiler/aro/include/stdarg.h:22:9
+pub const va_start = @compileError("unable to translate macro: undefined identifier `__builtin_va_start`");
+// /usr/local/zig/lib/compiler/aro/include/stdarg.h:12:9
+pub const va_end = @compileError("unable to translate macro: undefined identifier `__builtin_va_end`");
+// /usr/local/zig/lib/compiler/aro/include/stdarg.h:14:9
+pub const va_arg = @compileError("unable to translate macro: undefined identifier `__builtin_va_arg`");
+// /usr/local/zig/lib/compiler/aro/include/stdarg.h:15:9
+pub const __va_copy = @compileError("unable to translate macro: undefined identifier `__builtin_va_copy`");
+// /usr/local/zig/lib/compiler/aro/include/stdarg.h:18:9
+pub const va_copy = @compileError("unable to translate macro: undefined identifier `__builtin_va_copy`");
+// /usr/local/zig/lib/compiler/aro/include/stdarg.h:22:9
 pub const __GNUC_VA_LIST = @as(c_int, 1);
-pub const SQLITE_EXTERN = @compileError("unable to translate C expr: unexpected token 'extern'"); // /usr/include/sqlite3.h:72:10
+pub const SQLITE_EXTERN = @compileError("unable to translate C expr: unexpected token 'extern'");
+// /usr/include/sqlite3.h:72:10
 pub const SQLITE_API = "";
 pub const SQLITE_CDECL = "";
 pub const SQLITE_APICALL = "";

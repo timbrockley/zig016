@@ -198,12 +198,12 @@ pub fn __bswap_16(arg___bsx: __uint16_t) callconv(.c) __uint16_t {
 pub fn __bswap_32(arg___bsx: __uint32_t) callconv(.c) __uint32_t {
     var __bsx = arg___bsx;
     _ = &__bsx;
-    return @bitCast(@as(c_int, @byteSwap(@as(c_int, @bitCast(@as(c_uint, @truncate(__bsx)))))));
+    return @byteSwap(@as(__uint32_t, __bsx));
 }
 pub fn __bswap_64(arg___bsx: __uint64_t) callconv(.c) __uint64_t {
     var __bsx = arg___bsx;
     _ = &__bsx;
-    return @bitCast(@as(c_long, @byteSwap(@as(c_long, @bitCast(@as(c_ulong, @truncate(__bsx)))))));
+    return @byteSwap(@as(__uint64_t, __bsx));
 }
 pub fn __uint16_identity(arg___x: __uint16_t) callconv(.c) __uint16_t {
     var __x = arg___x;
@@ -1730,8 +1730,10 @@ pub const __x86_64__ = @as(c_int, 1);
 pub const __x86_64 = @as(c_int, 1);
 pub const __SEG_GS = @as(c_int, 1);
 pub const __SEG_FS = @as(c_int, 1);
-pub const __seg_gs = @compileError("unable to translate macro: undefined identifier `address_space`"); // <builtin>:33:9
-pub const __seg_fs = @compileError("unable to translate macro: undefined identifier `address_space`"); // <builtin>:34:9
+pub const __seg_gs = @compileError("unable to translate macro: undefined identifier `address_space`");
+// <builtin>:33:9
+pub const __seg_fs = @compileError("unable to translate macro: undefined identifier `address_space`");
+// <builtin>:34:9
 pub const __LAHF_SAHF__ = @as(c_int, 1);
 pub const __AES__ = @as(c_int, 1);
 pub const __VAES__ = @as(c_int, 1);
@@ -1856,10 +1858,12 @@ pub const __SIZEOF_INT128__ = @as(c_int, 16);
 pub const __INTPTR_TYPE__ = c_long;
 pub const __UINTPTR_TYPE__ = c_ulong;
 pub const __INTMAX_TYPE__ = c_long;
-pub const __INTMAX_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `L`"); // <builtin>:160:9
+pub const __INTMAX_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `L`");
+// <builtin>:160:9
 pub const __INTMAX_C = __helpers.L_SUFFIX;
 pub const __UINTMAX_TYPE__ = c_ulong;
-pub const __UINTMAX_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `UL`"); // <builtin>:163:9
+pub const __UINTMAX_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `UL`");
+// <builtin>:163:9
 pub const __UINTMAX_C = __helpers.UL_SUFFIX;
 pub const __PTRDIFF_TYPE__ = c_long;
 pub const __SIZE_TYPE__ = c_ulong;
@@ -1894,7 +1898,8 @@ pub inline fn __INT32_C(c: anytype) @TypeOf(c) {
 pub const __INT64_TYPE__ = c_long;
 pub const __INT64_FMTd__ = "ld";
 pub const __INT64_FMTi__ = "li";
-pub const __INT64_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `L`"); // <builtin>:189:9
+pub const __INT64_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `L`");
+// <builtin>:189:9
 pub const __INT64_C = __helpers.L_SUFFIX;
 pub const __UINT8_TYPE__ = u8;
 pub const __UINT8_FMTo__ = "hho";
@@ -1925,7 +1930,8 @@ pub const __UINT32_FMTo__ = "o";
 pub const __UINT32_FMTu__ = "u";
 pub const __UINT32_FMTx__ = "x";
 pub const __UINT32_FMTX__ = "X";
-pub const __UINT32_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `U`"); // <builtin>:214:9
+pub const __UINT32_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `U`");
+// <builtin>:214:9
 pub const __UINT32_C = __helpers.U_SUFFIX;
 pub const __UINT32_MAX__ = __helpers.promoteIntLiteral(c_uint, 4294967295, .decimal);
 pub const __INT32_MAX__ = __helpers.promoteIntLiteral(c_int, 2147483647, .decimal);
@@ -1934,7 +1940,8 @@ pub const __UINT64_FMTo__ = "lo";
 pub const __UINT64_FMTu__ = "lu";
 pub const __UINT64_FMTx__ = "lx";
 pub const __UINT64_FMTX__ = "lX";
-pub const __UINT64_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `UL`"); // <builtin>:223:9
+pub const __UINT64_C_SUFFIX__ = @compileError("unable to translate macro: undefined identifier `UL`");
+// <builtin>:223:9
 pub const __UINT64_C = __helpers.UL_SUFFIX;
 pub const __UINT64_MAX__ = __helpers.promoteIntLiteral(c_ulong, 18446744073709551615, .decimal);
 pub const __INT64_MAX__ = __helpers.promoteIntLiteral(c_long, 9223372036854775807, .decimal);
@@ -2092,11 +2099,16 @@ pub const _mysql_h = "";
 pub const LIBMARIADB = "";
 pub const MYSQL_CLIENT = "";
 pub const __STDC_VERSION_STDARG_H__ = @as(c_int, 0);
-pub const va_start = @compileError("unable to translate macro: undefined identifier `__builtin_va_start`"); // /usr/local/zig016/lib/compiler/aro/include/stdarg.h:12:9
-pub const va_end = @compileError("unable to translate macro: undefined identifier `__builtin_va_end`"); // /usr/local/zig016/lib/compiler/aro/include/stdarg.h:14:9
-pub const va_arg = @compileError("unable to translate macro: undefined identifier `__builtin_va_arg`"); // /usr/local/zig016/lib/compiler/aro/include/stdarg.h:15:9
-pub const __va_copy = @compileError("unable to translate macro: undefined identifier `__builtin_va_copy`"); // /usr/local/zig016/lib/compiler/aro/include/stdarg.h:18:9
-pub const va_copy = @compileError("unable to translate macro: undefined identifier `__builtin_va_copy`"); // /usr/local/zig016/lib/compiler/aro/include/stdarg.h:22:9
+pub const va_start = @compileError("unable to translate macro: undefined identifier `__builtin_va_start`");
+// /usr/local/zig/lib/compiler/aro/include/stdarg.h:12:9
+pub const va_end = @compileError("unable to translate macro: undefined identifier `__builtin_va_end`");
+// /usr/local/zig/lib/compiler/aro/include/stdarg.h:14:9
+pub const va_arg = @compileError("unable to translate macro: undefined identifier `__builtin_va_arg`");
+// /usr/local/zig/lib/compiler/aro/include/stdarg.h:15:9
+pub const __va_copy = @compileError("unable to translate macro: undefined identifier `__builtin_va_copy`");
+// /usr/local/zig/lib/compiler/aro/include/stdarg.h:18:9
+pub const va_copy = @compileError("unable to translate macro: undefined identifier `__builtin_va_copy`");
+// /usr/local/zig/lib/compiler/aro/include/stdarg.h:22:9
 pub const __GNUC_VA_LIST = @as(c_int, 1);
 pub const _TIME_H = @as(c_int, 1);
 pub const _FEATURES_H = @as(c_int, 1);
@@ -2111,7 +2123,8 @@ pub inline fn __glibc_clang_prereq(maj: anytype, min: anytype) @TypeOf(@as(c_int
     _ = &min;
     return @as(c_int, 0);
 }
-pub const __GLIBC_USE = @compileError("unable to translate macro: undefined identifier `__GLIBC_USE_`"); // /usr/include/features.h:191:9
+pub const __GLIBC_USE = @compileError("unable to translate macro: undefined identifier `__GLIBC_USE_`");
+// /usr/include/features.h:191:9
 pub const _DEFAULT_SOURCE = @as(c_int, 1);
 pub const __GLIBC_USE_ISOC2Y = @as(c_int, 0);
 pub const __GLIBC_USE_ISOC23 = @as(c_int, 0);
@@ -2153,19 +2166,28 @@ pub inline fn __GLIBC_PREREQ(maj: anytype, min: anytype) @TypeOf(((__GLIBC__ << 
     return ((__GLIBC__ << @as(c_int, 16)) + __GLIBC_MINOR__) >= ((maj << @as(c_int, 16)) + min);
 }
 pub const _SYS_CDEFS_H = @as(c_int, 1);
-pub const __glibc_has_attribute = @compileError("unable to translate macro: undefined identifier `__has_attribute`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:45:10
+pub const __glibc_has_attribute = @compileError("unable to translate macro: undefined identifier `__has_attribute`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:45:10
 pub inline fn __glibc_has_builtin(name: anytype) @TypeOf(__builtin.has_builtin(name)) {
     _ = &name;
     return __builtin.has_builtin(name);
 }
-pub const __glibc_has_extension = @compileError("unable to translate macro: undefined identifier `__has_extension`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:55:10
-pub const __LEAF = @compileError("unable to translate macro: undefined identifier `__leaf__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:65:11
-pub const __LEAF_ATTR = @compileError("unable to translate macro: undefined identifier `__leaf__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:66:11
-pub const __THROW = @compileError("unable to translate macro: undefined identifier `__nothrow__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:79:11
-pub const __THROWNL = @compileError("unable to translate macro: undefined identifier `__nothrow__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:80:11
-pub const __NTH = @compileError("unable to translate macro: undefined identifier `__nothrow__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:81:11
-pub const __NTHNL = @compileError("unable to translate macro: undefined identifier `__nothrow__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:82:11
-pub const __COLD = @compileError("unable to translate macro: undefined identifier `__cold__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:102:11
+pub const __glibc_has_extension = @compileError("unable to translate macro: undefined identifier `__has_extension`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:55:10
+pub const __LEAF = @compileError("unable to translate macro: undefined identifier `__leaf__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:65:11
+pub const __LEAF_ATTR = @compileError("unable to translate macro: undefined identifier `__leaf__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:66:11
+pub const __THROW = @compileError("unable to translate macro: undefined identifier `__nothrow__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:79:11
+pub const __THROWNL = @compileError("unable to translate macro: undefined identifier `__nothrow__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:80:11
+pub const __NTH = @compileError("unable to translate macro: undefined identifier `__nothrow__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:81:11
+pub const __NTHNL = @compileError("unable to translate macro: undefined identifier `__nothrow__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:82:11
+pub const __COLD = @compileError("unable to translate macro: undefined identifier `__cold__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:102:11
 pub inline fn __P(args: anytype) @TypeOf(args) {
     _ = &args;
     return args;
@@ -2174,8 +2196,10 @@ pub inline fn __PMT(args: anytype) @TypeOf(args) {
     _ = &args;
     return args;
 }
-pub const __CONCAT = @compileError("unable to translate C expr: unexpected token '##'"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:131:9
-pub const __STRING = @compileError("unable to translate C expr: unexpected token ''"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:132:9
+pub const __CONCAT = @compileError("unable to translate C expr: unexpected token '##'");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:131:9
+pub const __STRING = @compileError("unable to translate C expr: unexpected token ''");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:132:9
 pub const __ptr_t = ?*anyopaque;
 pub const __BEGIN_DECLS = "";
 pub const __END_DECLS = "";
@@ -2196,14 +2220,21 @@ pub inline fn __glibc_objsize(__o: anytype) @TypeOf(__bos(__o)) {
     _ = &__o;
     return __bos(__o);
 }
-pub const __warnattr = @compileError("unable to translate macro: undefined identifier `__warning__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:366:10
-pub const __errordecl = @compileError("unable to translate macro: undefined identifier `__error__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:367:10
-pub const __flexarr = @compileError("unable to translate C expr: unexpected token '['"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:379:10
+pub const __warnattr = @compileError("unable to translate macro: undefined identifier `__warning__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:366:10
+pub const __errordecl = @compileError("unable to translate macro: undefined identifier `__error__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:367:10
+pub const __flexarr = @compileError("unable to translate C expr: unexpected token '['");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:379:10
 pub const __glibc_c99_flexarr_available = @as(c_int, 1);
-pub const __REDIRECT = @compileError("unable to translate C expr: unexpected token '__asm__'"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:410:10
-pub const __REDIRECT_NTH = @compileError("unable to translate C expr: unexpected token '__asm__'"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:417:11
-pub const __REDIRECT_NTHNL = @compileError("unable to translate C expr: unexpected token '__asm__'"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:419:11
-pub const __ASMNAME = @compileError("unable to translate macro: undefined identifier `__USER_LABEL_PREFIX__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:422:10
+pub const __REDIRECT = @compileError("unable to translate C expr: unexpected token '__asm__'");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:410:10
+pub const __REDIRECT_NTH = @compileError("unable to translate C expr: unexpected token '__asm__'");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:417:11
+pub const __REDIRECT_NTHNL = @compileError("unable to translate C expr: unexpected token '__asm__'");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:419:11
+pub const __ASMNAME = @compileError("unable to translate macro: undefined identifier `__USER_LABEL_PREFIX__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:422:10
 pub inline fn __ASMNAME2(prefix: anytype, cname: anytype) @TypeOf(__STRING(prefix) ++ cname) {
     _ = &prefix;
     _ = &cname;
@@ -2211,34 +2242,56 @@ pub inline fn __ASMNAME2(prefix: anytype, cname: anytype) @TypeOf(__STRING(prefi
 }
 pub const __REDIRECT_FORTIFY = __REDIRECT;
 pub const __REDIRECT_FORTIFY_NTH = __REDIRECT_NTH;
-pub const __attribute_malloc__ = @compileError("unable to translate macro: undefined identifier `__malloc__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:452:10
-pub const __attribute_alloc_size__ = @compileError("unable to translate macro: undefined identifier `__alloc_size__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:460:10
-pub const __attribute_alloc_align__ = @compileError("unable to translate macro: undefined identifier `__alloc_align__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:469:10
-pub const __attribute_pure__ = @compileError("unable to translate macro: undefined identifier `__pure__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:479:10
-pub const __attribute_const__ = @compileError("unable to translate C expr: unexpected token '__attribute__'"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:486:10
-pub const __attribute_maybe_unused__ = @compileError("unable to translate macro: undefined identifier `__unused__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:492:10
-pub const __attribute_used__ = @compileError("unable to translate macro: undefined identifier `__used__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:501:10
-pub const __attribute_noinline__ = @compileError("unable to translate macro: undefined identifier `__noinline__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:502:10
-pub const __attribute_deprecated__ = @compileError("unable to translate macro: undefined identifier `__deprecated__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:510:10
-pub const __attribute_deprecated_msg__ = @compileError("unable to translate macro: undefined identifier `__deprecated__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:520:10
-pub const __attribute_format_arg__ = @compileError("unable to translate macro: undefined identifier `__format_arg__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:533:10
-pub const __attribute_format_strfmon__ = @compileError("unable to translate macro: undefined identifier `__format__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:543:10
-pub const __attribute_nonnull__ = @compileError("unable to translate macro: undefined identifier `__nonnull__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:555:11
+pub const __attribute_malloc__ = @compileError("unable to translate macro: undefined identifier `__malloc__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:452:10
+pub const __attribute_alloc_size__ = @compileError("unable to translate macro: undefined identifier `__alloc_size__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:460:10
+pub const __attribute_alloc_align__ = @compileError("unable to translate macro: undefined identifier `__alloc_align__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:469:10
+pub const __attribute_pure__ = @compileError("unable to translate macro: undefined identifier `__pure__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:479:10
+pub const __attribute_const__ = @compileError("unable to translate C expr: unexpected token '__attribute__'");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:486:10
+pub const __attribute_maybe_unused__ = @compileError("unable to translate macro: undefined identifier `__unused__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:492:10
+pub const __attribute_used__ = @compileError("unable to translate macro: undefined identifier `__used__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:501:10
+pub const __attribute_noinline__ = @compileError("unable to translate macro: undefined identifier `__noinline__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:502:10
+pub const __attribute_deprecated__ = @compileError("unable to translate macro: undefined identifier `__deprecated__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:510:10
+pub const __attribute_deprecated_msg__ = @compileError("unable to translate macro: undefined identifier `__deprecated__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:520:10
+pub const __attribute_format_arg__ = @compileError("unable to translate macro: undefined identifier `__format_arg__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:533:10
+pub const __attribute_format_strfmon__ = @compileError("unable to translate macro: undefined identifier `__format__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:543:10
+pub const __attribute_nonnull__ = @compileError("unable to translate macro: undefined identifier `__nonnull__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:555:11
 pub inline fn __nonnull(params: anytype) @TypeOf(__attribute_nonnull__(params)) {
     _ = &params;
     return __attribute_nonnull__(params);
 }
-pub const __returns_nonnull = @compileError("unable to translate macro: undefined identifier `__returns_nonnull__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:568:10
-pub const __attribute_warn_unused_result__ = @compileError("unable to translate macro: undefined identifier `__warn_unused_result__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:577:10
+pub const __returns_nonnull = @compileError("unable to translate macro: undefined identifier `__returns_nonnull__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:568:10
+pub const __attribute_warn_unused_result__ = @compileError("unable to translate macro: undefined identifier `__warn_unused_result__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:577:10
 pub const __wur = "";
-pub const __always_inline = @compileError("unable to translate macro: undefined identifier `__always_inline__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:595:10
-pub const __attribute_artificial__ = @compileError("unable to translate macro: undefined identifier `__artificial__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:604:10
-pub const __extern_inline = @compileError("unable to translate C expr: unexpected token 'extern'"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:626:11
-pub const __extern_always_inline = @compileError("unable to translate C expr: unexpected token 'extern'"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:627:11
+pub const __always_inline = @compileError("unable to translate macro: undefined identifier `__always_inline__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:595:10
+pub const __attribute_artificial__ = @compileError("unable to translate macro: undefined identifier `__artificial__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:604:10
+pub const __extern_inline = @compileError("unable to translate C expr: unexpected token 'extern'");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:626:11
+pub const __extern_always_inline = @compileError("unable to translate C expr: unexpected token 'extern'");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:627:11
 pub const __fortify_function = __extern_always_inline ++ __attribute_artificial__;
-pub const __va_arg_pack = @compileError("unable to translate macro: undefined identifier `__builtin_va_arg_pack`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:638:10
-pub const __va_arg_pack_len = @compileError("unable to translate macro: undefined identifier `__builtin_va_arg_pack_len`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:639:10
-pub const __restrict_arr = @compileError("unable to translate C expr: unexpected token '__restrict'"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:666:10
+pub const __va_arg_pack = @compileError("unable to translate macro: undefined identifier `__builtin_va_arg_pack`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:638:10
+pub const __va_arg_pack_len = @compileError("unable to translate macro: undefined identifier `__builtin_va_arg_pack_len`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:639:10
+pub const __restrict_arr = @compileError("unable to translate C expr: unexpected token '__restrict'");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:666:10
 pub inline fn __glibc_unlikely(cond: anytype) @TypeOf(__builtin.expect(cond, @as(c_int, 0))) {
     _ = &cond;
     return __builtin.expect(cond, @as(c_int, 0));
@@ -2295,8 +2348,10 @@ pub inline fn __REDIRECT_NTH_LDBL(name: anytype, proto: anytype, alias: anytype)
     _ = &alias;
     return __REDIRECT_NTH(name, proto, alias);
 }
-pub const __glibc_macro_warning1 = @compileError("unable to translate macro: undefined identifier `_Pragma`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:807:10
-pub const __glibc_macro_warning = @compileError("unable to translate macro: undefined identifier `GCC`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:808:10
+pub const __glibc_macro_warning1 = @compileError("unable to translate macro: undefined identifier `_Pragma`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:807:10
+pub const __glibc_macro_warning = @compileError("unable to translate macro: undefined identifier `GCC`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:808:10
 pub const __HAVE_GENERIC_SELECTION = @as(c_int, 1);
 pub inline fn __fortified_attr_access(a: anytype, o: anytype, s: anytype) void {
     _ = &a;
@@ -2318,8 +2373,10 @@ pub inline fn __attr_dealloc(dealloc: anytype, argno: anytype) void {
     return;
 }
 pub const __attr_dealloc_free = "";
-pub const __attribute_returns_twice__ = @compileError("unable to translate macro: undefined identifier `__returns_twice__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:872:10
-pub const __attribute_struct_may_alias__ = @compileError("unable to translate macro: undefined identifier `__may_alias__`"); // /usr/include/x86_64-linux-gnu/sys/cdefs.h:881:10
+pub const __attribute_returns_twice__ = @compileError("unable to translate macro: undefined identifier `__returns_twice__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:872:10
+pub const __attribute_struct_may_alias__ = @compileError("unable to translate macro: undefined identifier `__may_alias__`");
+// /usr/include/x86_64-linux-gnu/sys/cdefs.h:881:10
 pub const __stub___compat_bdflush = "";
 pub const __stub_chflags = "";
 pub const __stub_fchflags = "";
@@ -2332,7 +2389,8 @@ pub const __need_size_t = "";
 pub const __need_NULL = "";
 pub const __STDC_VERSION_STDDEF_H__ = @as(c_long, 202311);
 pub const NULL = __helpers.cast(?*anyopaque, @as(c_int, 0));
-pub const offsetof = @compileError("unable to translate macro: undefined identifier `__builtin_offsetof`"); // /usr/local/zig016/lib/compiler/aro/include/stddef.h:18:9
+pub const offsetof = @compileError("unable to translate macro: undefined identifier `__builtin_offsetof`");
+// /usr/local/zig/lib/compiler/aro/include/stddef.h:18:9
 pub const _BITS_TIME_H = @as(c_int, 1);
 pub const _BITS_TYPES_H = @as(c_int, 1);
 pub const __S16_TYPE = c_short;
@@ -2382,7 +2440,8 @@ pub const __KEY_T_TYPE = __S32_TYPE;
 pub const __CLOCKID_T_TYPE = __S32_TYPE;
 pub const __TIMER_T_TYPE = ?*anyopaque;
 pub const __BLKSIZE_T_TYPE = __SYSCALL_SLONG_TYPE;
-pub const __FSID_T_TYPE = @compileError("unable to translate macro: undefined identifier `__val`"); // /usr/include/x86_64-linux-gnu/bits/typesizes.h:73:9
+pub const __FSID_T_TYPE = @compileError("unable to translate macro: undefined identifier `__val`");
+// /usr/include/x86_64-linux-gnu/bits/typesizes.h:73:9
 pub const __SSIZE_T_TYPE = __SWORD_TYPE;
 pub const __CPU_MASK_TYPE = __SYSCALL_ULONG_TYPE;
 pub const __OFF_T_MATCHES_OFF64_T = @as(c_int, 1);
@@ -2519,9 +2578,12 @@ pub inline fn le64toh(x: anytype) @TypeOf(__uint64_identity(x)) {
     return __uint64_identity(x);
 }
 pub const _SYS_SELECT_H = @as(c_int, 1);
-pub const __FD_ZERO = @compileError("unable to translate macro: undefined identifier `__i`"); // /usr/include/x86_64-linux-gnu/bits/select.h:25:9
-pub const __FD_SET = @compileError("unable to translate C expr: expected ')' instead got '|='"); // /usr/include/x86_64-linux-gnu/bits/select.h:32:9
-pub const __FD_CLR = @compileError("unable to translate C expr: expected ')' instead got '&='"); // /usr/include/x86_64-linux-gnu/bits/select.h:34:9
+pub const __FD_ZERO = @compileError("unable to translate macro: undefined identifier `__i`");
+// /usr/include/x86_64-linux-gnu/bits/select.h:25:9
+pub const __FD_SET = @compileError("unable to translate C expr: expected ')' instead got '|='");
+// /usr/include/x86_64-linux-gnu/bits/select.h:32:9
+pub const __FD_CLR = @compileError("unable to translate C expr: expected ')' instead got '&='");
+// /usr/include/x86_64-linux-gnu/bits/select.h:34:9
 pub inline fn __FD_ISSET(d: anytype, s: anytype) @TypeOf((__FDS_BITS(s)[@as(usize, @intCast(__FD_ELT(d)))] & __FD_MASK(d)) != @as(c_int, 0)) {
     _ = &d;
     _ = &s;
@@ -2587,9 +2649,11 @@ pub const __ONCE_ALIGNMENT = "";
 pub const _BITS_ATOMIC_WIDE_COUNTER_H = "";
 pub const _THREAD_MUTEX_INTERNAL_H = @as(c_int, 1);
 pub const __PTHREAD_MUTEX_HAVE_PREV = @as(c_int, 1);
-pub const __PTHREAD_MUTEX_INITIALIZER = @compileError("unable to translate C expr: unexpected token '{'"); // /usr/include/x86_64-linux-gnu/bits/struct_mutex.h:56:10
+pub const __PTHREAD_MUTEX_INITIALIZER = @compileError("unable to translate C expr: unexpected token '{'");
+// /usr/include/x86_64-linux-gnu/bits/struct_mutex.h:56:10
 pub const _RWLOCK_INTERNAL_H = "";
-pub const __PTHREAD_RWLOCK_ELISION_EXTRA = @compileError("unable to translate C expr: unexpected token '{'"); // /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:40:11
+pub const __PTHREAD_RWLOCK_ELISION_EXTRA = @compileError("unable to translate C expr: unexpected token '{'");
+// /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:40:11
 pub inline fn __PTHREAD_RWLOCK_INITIALIZER(__flags: anytype) @TypeOf(__flags) {
     _ = &__flags;
     return blk: {
@@ -2606,7 +2670,8 @@ pub inline fn __PTHREAD_RWLOCK_INITIALIZER(__flags: anytype) @TypeOf(__flags) {
         break :blk __flags;
     };
 }
-pub const __ONCE_FLAG_INIT = @compileError("unable to translate C expr: unexpected token '{'"); // /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:114:9
+pub const __ONCE_FLAG_INIT = @compileError("unable to translate C expr: unexpected token '{'");
+// /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:114:9
 pub const __have_pthread_attr_t = @as(c_int, 1);
 pub const STDCALL = "";
 pub const my_socket_defined = "";
@@ -2763,7 +2828,8 @@ pub const FIELD_TYPE_VAR_STRING = MYSQL_TYPE_VAR_STRING;
 pub const FIELD_TYPE_STRING = MYSQL_TYPE_STRING;
 pub const FIELD_TYPE_GEOMETRY = MYSQL_TYPE_GEOMETRY;
 pub const FIELD_TYPE_BIT = MYSQL_TYPE_BIT;
-pub const net_new_transaction = @compileError("unable to translate C expr: expected ')' instead got '='"); // /usr/include/mysql/mariadb_com.h:415:9
+pub const net_new_transaction = @compileError("unable to translate C expr: expected ')' instead got '='");
+// /usr/include/mysql/mariadb_com.h:415:9
 pub const MARIADB_CONNECTION_UNIXSOCKET = @as(c_int, 0);
 pub const MARIADB_CONNECTION_TCP = @as(c_int, 1);
 pub const MARIADB_CONNECTION_NAMEDPIPE = @as(c_int, 2);
@@ -2797,8 +2863,10 @@ pub inline fn list_rest(a: anytype) @TypeOf(a.*.next) {
     _ = &a;
     return a.*.next;
 }
-pub const list_push = @compileError("unable to translate C expr: unexpected token '='"); // /usr/include/mysql/ma_list.h:41:9
-pub const list_pop = @compileError("unable to translate macro: undefined identifier `old`"); // /usr/include/mysql/ma_list.h:42:9
+pub const list_push = @compileError("unable to translate C expr: unexpected token '='");
+// /usr/include/mysql/ma_list.h:41:9
+pub const list_pop = @compileError("unable to translate macro: undefined identifier `old`");
+// /usr/include/mysql/ma_list.h:42:9
 pub const _mariadb_ctype_h = "";
 pub const _CTYPE_H = @as(c_int, 1);
 pub inline fn _ISbit(bit: anytype) @TypeOf(if (__helpers.cast(bool, bit < @as(c_int, 8))) (@as(c_int, 1) << bit) << @as(c_int, 8) else (@as(c_int, 1) << bit) >> @as(c_int, 8)) {
@@ -2818,15 +2886,18 @@ pub inline fn __toascii(c: anytype) @TypeOf(c & @as(c_int, 0x7f)) {
     _ = &c;
     return c & @as(c_int, 0x7f);
 }
-pub const __exctype = @compileError("unable to translate C expr: unexpected token 'extern'"); // /usr/include/ctype.h:102:9
-pub const __tobody = @compileError("unable to translate macro: undefined identifier `__res`"); // /usr/include/ctype.h:155:9
+pub const __exctype = @compileError("unable to translate C expr: unexpected token 'extern'");
+// /usr/include/ctype.h:102:9
+pub const __tobody = @compileError("unable to translate macro: undefined identifier `__res`");
+// /usr/include/ctype.h:155:9
 pub inline fn __isctype_l(c: anytype, @"type": anytype, locale: anytype) @TypeOf(locale.*.__ctype_b[@as(usize, @intCast(__helpers.cast(c_int, c)))] & __helpers.cast(c_ushort, @"type")) {
     _ = &c;
     _ = &@"type";
     _ = &locale;
     return locale.*.__ctype_b[@as(usize, @intCast(__helpers.cast(c_int, c)))] & __helpers.cast(c_ushort, @"type");
 }
-pub const __exctype_l = @compileError("unable to translate C expr: unexpected token 'extern'"); // /usr/include/ctype.h:244:10
+pub const __exctype_l = @compileError("unable to translate C expr: unexpected token 'extern'");
+// /usr/include/ctype.h:244:10
 pub inline fn __isalnum_l(c: anytype, l: anytype) @TypeOf(__isctype_l(c, _ISalnum, l)) {
     _ = &c;
     _ = &l;
@@ -2943,18 +3014,21 @@ pub inline fn INTERNAL_NUM_FIELD(f: anytype) @TypeOf(((((f.*.type <= MYSQL_TYPE_
     _ = &f;
     return ((((f.*.type <= MYSQL_TYPE_INT24) and (((f.*.type != MYSQL_TYPE_TIMESTAMP) or (f.*.length == @as(c_int, 14))) or (f.*.length == @as(c_int, 8)))) or (f.*.type == MYSQL_TYPE_YEAR)) or (f.*.type == MYSQL_TYPE_NEWDECIMAL)) or (f.*.type == MYSQL_TYPE_DECIMAL);
 }
-pub const SET_CLIENT_ERROR = @compileError("unable to translate macro: undefined identifier `strncpy`"); // /usr/include/mysql/mysql.h:139:9
+pub const SET_CLIENT_ERROR = @compileError("unable to translate macro: undefined identifier `strncpy`");
+// /usr/include/mysql/mysql.h:139:9
 pub inline fn set_mariadb_error(A: anytype, B: anytype, C: anytype) @TypeOf(SET_CLIENT_ERROR(A, B, C, @as(c_int, 0))) {
     _ = &A;
     _ = &B;
     _ = &C;
     return SET_CLIENT_ERROR(A, B, C, @as(c_int, 0));
 }
+
 // /usr/include/mysql/mysql.h:151:9: warning: macro 'unknown_sqlstate' contains a runtime value, translated to function
 pub inline fn unknown_sqlstate() @TypeOf(SQLSTATE_UNKNOWN) {
     return SQLSTATE_UNKNOWN;
 }
-pub const CLEAR_CLIENT_ERROR = @compileError("unable to translate macro: undefined identifier `strcpy`"); // /usr/include/mysql/mysql.h:153:9
+pub const CLEAR_CLIENT_ERROR = @compileError("unable to translate macro: undefined identifier `strcpy`");
+// /usr/include/mysql/mysql.h:153:9
 pub const MYSQL_COUNT_ERROR = ~__helpers.cast(c_ulonglong, @as(c_int, 0));
 pub const MARIADB_FIELD_ATTR_LAST = MARIADB_FIELD_ATTR_FORMAT_NAME;
 pub const AUTO_SEC_PART_DIGITS = @as(c_int, 39);
@@ -2985,13 +3059,15 @@ pub inline fn MARIADB_STMT_BULK_UNIT_RESULTS_SUPPORTED(stmt: anytype) @TypeOf((s
     _ = &stmt;
     return (stmt.*.mysql != 0) and (!((stmt.*.mysql.*.server_capabilities & CLIENT_MYSQL) != 0) and ((stmt.*.mysql.*.extension.*.mariadb_client_flag & (MARIADB_CLIENT_BULK_UNIT_RESULTS >> @as(c_int, 32))) != 0));
 }
-pub const CLEAR_CLIENT_STMT_ERROR = @compileError("unable to translate macro: undefined identifier `strcpy`"); // /usr/include/mysql/mariadb_stmt.h:43:9
+pub const CLEAR_CLIENT_STMT_ERROR = @compileError("unable to translate macro: undefined identifier `strcpy`");
+// /usr/include/mysql/mariadb_stmt.h:43:9
 pub const MYSQL_PS_SKIP_RESULT_W_LEN = -@as(c_int, 1);
 pub const MYSQL_PS_SKIP_RESULT_STR = -@as(c_int, 2);
 pub const STMT_ID_LENGTH = @as(c_int, 4);
 pub const STMT_BULK_FLAG_CLIENT_SEND_TYPES = @as(c_int, 128);
 pub const STMT_BULK_FLAG_SEND_UNIT_RESULTS = @as(c_int, 64);
-pub const MYSQL_CLIENT_PLUGIN_HEADER = @compileError("unable to translate macro: undefined identifier `type`"); // /usr/include/mysql/mysql.h:482:9
+pub const MYSQL_CLIENT_PLUGIN_HEADER = @compileError("unable to translate macro: undefined identifier `type`");
+// /usr/include/mysql/mysql.h:482:9
 pub inline fn mysql_reload(mysql: anytype) @TypeOf(mysql_refresh(mysql, REFRESH_GRANT)) {
     _ = &mysql;
     return mysql_refresh(mysql, REFRESH_GRANT);
